@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
@@ -312,43 +312,318 @@
   <script>
     const searchInput = document.getElementById("searchInput");
     const filterButtons = document.querySelectorAll(".filter-btn");
-    const cards = document.querySelectorAll(".card");
-    const emptyState = document.getElementById("emptyState");
-
-    let activeCategory = "all";
-
-    function updateList() {
-      const query = searchInput.value.trim().toLowerCase();
-      let visibleCount = 0;
-
-      cards.forEach((card) => {
-        const category = card.dataset.category;
-        const searchable = card.dataset.search.toLowerCase();
-
-        const matchesCategory = activeCategory === "all" || category === activeCategory;
-        const matchesQuery = !query || searchable.includes(query);
-
-        if (matchesCategory && matchesQuery) {
-          card.style.display = "flex";
-          visibleCount++;
-        } else {
-          card.style.display = "none";
-        }
-      });
-
-      emptyState.style.display = visibleCount === 0 ? "block" : "none";
+    const cards
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Türk Granny & DVloper TikTok Rehberi</title>
+  <style>
+    :root {
+      --bg: #0c0d10;
+      --card: #15171d;
+      --card-border: #262933;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --accent: #e11d48;
+      --accent-hover: #be123c;
+      --tag-bg: #222632;
     }
 
-    searchInput.addEventListener("input", updateList);
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
 
-    filterButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        filterButtons.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        activeCategory = btn.dataset.filter;
-        updateList();
-      });
-    });
-  </script>
-</body>
-</html>
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 20px 14px 48px;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(145deg, #191115, #121318);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 22px 18px;
+      margin-bottom: 18px;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      background: var(--card);
+      color: var(--muted);
+      border: 1px solid var(--card-border);
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .name {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .handle {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: #d1d5db;
+    }
+
+    .stat-pill {
+      background: var(--tag-bg);
+      padding: 4px 9px;
+      border-radius: 8px;
+    }
+
+    .bio {
+      font-size: 0.92rem;
+      color: #e5e7eb;
+    }
+
+    .info-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 6px 12px;
+      background: #101217;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.86rem;
+      color: #d1d5db;
+    }
+
+    .info-list span {
+      color: var(--muted);
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .tag {
+      font-size: 0.78rem;
+      color: #fda4af;
+      background: rgba(225, 29, 72, 0.14);
+      border: 1px solid rgba(225, 29, 72, 0.3);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .btn-link {
+      text-decoration: none;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 10px;
+      transition: 0.2s;
+    }
+
+    .btn-link:hover {
+      background: var(--accent-hover);
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 28px 12px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Türk Granny &amp; DVloper TikTok Hesapları</h1>
+      <p>Granny, Granny Chapter Two ve DVloper evreni üzerine içerik üreten öne çıkan Türk TikTok hesaplarının kısa tanıtım listesi.</p>
+    </header>
+
+    <div class="controls">
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Hesap adı, gerçek isim, @kullaniciadi veya içerik türü ara..."
+      />
+      <div class="filters" id="filterBar">
+        <button class="filter-btn active" data-filter="all">Tümü</button>
+        <button class="filter-btn" data-filter="Oynanış &amp; Zor Mod">Oynanış &amp; Zor Mod</button>
+        <button class="filter-btn" data-filter="Bilgi &amp; Lore">Bilgi &amp; Lore</button>
+        <button class="filter-btn" data-filter="Eğlence &amp; Klipler">Eğlence &amp; Klipler</button>
+      </div>
+    </div>
+
+    <div class="grid" id="accountsGrid">
+      <!-- 1. FF stud -->
+      <article class="card" data-category="Oynanış &amp; Zor Mod" data-search="ff stud @ffstudoffical yusuf efe ersöz dvloper granny 10b">
+        <div class="card-top">
+          <div>
+            <div class="name">FF stud</div>
+            <div class="handle">@ffstudoffical</div>
+          </div>
+          <span class="tag">Oynanış &amp; Zor Mod</span>
+        </div>
+        <div class="stats">
+          <span class="stat-pill">10B Takipçi</span>
+          <span class="stat-pill">301,1 B Beğeni</span>
+        </div>
+        <p class="bio">
+          TikTok'ta 10B takipçiye ulaşan ve Türkiye'nin en büyük DVloper hesabı olarak öne çıkan içerik üreticisidir.
+        </p>
+        <ul class="info-list">
+          <li><span>Gerçek İsim:</span> Yusuf Efe Ersöz</li>
+          <li><span>Doğum Tarihi:</span> 14 Ekim 2013</li>
+          <li><span>Yaş:</span> 14</li>
+          <li><span>Yaşadığı Yer:</span> Gizli</li>
+        </ul>
+        <div class="card-footer">
+          <span class="handle">DVloper / Granny</span>
+          <a class="btn-link" href="https://www.tiktok.com/@ffstudoffical" target="_blank" rel="noopener noreferrer">TikTok'ta Aç</a>
+        </div>
+      </article>
+
+      <!-- 2. Nosferatu Vampiroğulları. -->
+      <article class="card" data-category="Bilgi &amp; Lore" data-search="nosferatu vampiroğulları @nosferatuadamya999 dvloper dennis vukano bilgi karakter">
+        <div class="card-top">
+          <div>
+            <div class="name">Nosferatu Vampiroğulları.</div>
+            <div class="handle">@nosferatuadamya999</div>
+          </div>
+          <span class="tag">Bilgi &amp; Lore</span>
+        </div>
+        <div class="stats">
+          <span class="stat-pill">411 Takipçi</span>
+          <span class="stat-pill">7.466 Beğeni</span>
+        </div>
+        <p class="bio">
+          Granny karakterleri, DVloper oyunları ve oyun içi detaylar hakkında bilgilendirici ve arka plan odaklı videolar paylaşıyor.
+        </p>
+        <div class="card-footer">
+          <span class="handle">Bilgi &amp; Detaylar</span>
+          <a class="btn-link" href="https://www.tiktok.com/@nosferatuadamya999" target="_blank" rel="noopener noreferrer">TikTok'ta Aç</a>
+        </div>
+      </article>
+
+      <!-- 3. YouTube Modiac -->
+      <article class="card" data-category="Eğlence &amp; Klipler" data-search="youtube modiac @youtube.modiac10 granny chapter two slenderman bilgi komik">
+        <div class="card-top">
+          <div>
+            <div class="name">YouTube Modiac</div>
+            <div class="handle">@youtube.modiac10</div>
+          </div>
+          <span class="tag">Eğlence &amp; Klipler</span>
+        </div>
+        <div class="stats">
+          <span class="stat-pill">2.074 Takipçi</span>
+          <span class="stat-pill">251,1 B Beğeni</span>
+        </div>
+        <p class="bio">
+          Granny, Granny Chapter Two ve Slenderman içeriklerinde hem ilginç bilgileri hem de kısa komik/oynanış kliplerini bir araya getiriyor.
+        </p>
+        <div class="card-footer">
+          <span class="handle">Granny &amp; Korku</span>
+          <a class="btn-link" href="https://www.tiktok.com/@youtube.modiac10" target="_blank" rel="noopener noreferrer">TikTok'ta Aç</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="empty" id="emptyState">Aramana uygun hesap bulunamadı.</div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const cards
